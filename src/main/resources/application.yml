@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: tube-client
+            client-secret: 3IvK7yZlwFzdD0QJAga1RAyR3EEJle0M # Keycloak에서 발급
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9001/realms/tube
