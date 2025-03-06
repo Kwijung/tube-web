@@ -3,30 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인 성공</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
-  </style>
+  <title>내 동영상 관리</title>
 </head>
 <body>
 <h1>로그인 성공!</h1>
 <p>환영합니다, <strong th:text="${username}"></strong>님!</p>
-<p>이메일: <span th:text="${email}"></span></p>
 
-<h2>액세스 토큰</h2>
-<pre th:text="${accessToken}"></pre>
+<h2>동영상 업로드</h2>
+<form action="/video/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" accept="video/*" required>
+  <button type="submit">업로드</button>
+</form>
 
-<h2>리프레시 토큰</h2>
-<pre th:text="${refreshToken}"></pre>
+<h2>내 동영상 목록</h2>
+<ul>
+  <li th:each="video : ${videos}">
+    <a th:href="@{/video/play/{id}(id=${video.id})}" th:text="${video.filename}"></a>
+    <form action="/video/delete/{id}" method="post">
+      <input type="hidden" name="id" th:value="${video.id}">
+      <button type="submit">삭제</button>
+    </form>
+  </li>
+</ul>
 
 <a href="/logout">
   <button>로그아웃</button>

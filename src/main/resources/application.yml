@@ -15,3 +15,14 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://localhost:9001/realms/tube
+  datasource:
+    url: jdbc:postgresql://localhost:5432/keycloak
+    username: keycloak
+    password: keycloak
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
